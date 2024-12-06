@@ -22,3 +22,8 @@ if you don’t have full hemianopia. Trigonometry (sin, cos, tan) will help calc
 
 Once a week for 10 weeks, do 5 repetitions of 8 minutes of focusing on the focal point 
 followed by an 8 minute break (40 minutes of training in total).
+
+## Measuring Progress
+
+You can track your progress by asking your optician for a peripheral vision test. Alternatively,
+ there is a Free Visual Field Analyzer called [EyesCream](http://www.eyesage.org/).
