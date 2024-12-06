@@ -45,15 +45,22 @@ https://www.amazon.co.uk/Elegoo-120pcs-Multicolored-Breadboard-arduino-colorful/
 
 ## Preparation & Notes
 
-The LED strip driver required its own power source and the variable power adaptor with built in USB allowed for a us to use the main output with the screw terminal connector to power the LED strip driver and for the USB-A to USB-B cable to power the Arduino base unit. 
+The LED strip driver required its own power source and the variable power adaptor with built in USB allowed for a us to 
+use the main output with the screw terminal connector to power the LED strip driver and for the USB-A to USB-B cable to 
+power the Arduino base unit. 
 
-From the LED lights, cut 3 x 6 LED sections. These will need to be soldered in series to connect the ground/positives together from each alternate end. I left the initial power supply wires with the male DuPont pins connected for ease of connection to the LED strip driver. 
+From the LED lights, cut 3 x 6 LED sections. These will need to be soldered in series to connect the ground/positives 
+together from each alternate end. I left the initial power supply wires with the male DuPont pins connected for ease of 
+connection to the LED strip driver. 
 
-The white noise WAV file was created based of these instructions: Music Player Using Arduino : 5 Steps - Instructables 
+The white noise WAV file was created based of these instructions: 
+[Music Player Using Arduino : 5 Steps - Instructables](https://www.instructables.com/Music-Player-Using-Arduino/)
 
-The speaker supplied by the client needed the wires soldered, as opposed to the example in the link above which could connect without soldering. 
+The speaker supplied by the client needed the wires soldered, as opposed to the example in the link above which could 
+connect without soldering. 
 
-My soldering iron and skills are poor, and I had issues getting the solder to stick to the LED terminals. So, to help endure connections, I bodged all the soldering with the help of a hot glue gun.  
+My soldering iron and skills are poor, and I had issues getting the solder to stick to the LED terminals. So, to help 
+endure connections, I bodged all the soldering with the help of a hot glue gun.  
 
 There is no doubt a cheaper/simpler  way to create this if you use individual capacitors and resistors etc. 
 
@@ -75,9 +82,12 @@ Connect one speaker wire to Pin 6 on the base shield and the other to one of the
 
 ### LED lights and Driver 
 
-Connect the ground wire to the ‘G’ terminal of the LED strip driver and the positive wire to the ‘+’ terminal of the LED Strip driver. Using stripped down cables, connect the power supply from the screw terminal adaptor that came with the power supply. 
+Connect the ground wire to the ‘G’ terminal of the LED strip driver and the positive wire to the ‘+’ terminal of the 
+LED Strip driver. Using stripped down cables, connect the power supply from the screw terminal adaptor that came with 
+the power supply. 
 
-With the cable that came with the LED strip driver, plug one end into the strip driver input and the other end into the top of the base shield in plug D2. 
+With the cable that came with the LED strip driver, plug one end into the strip driver input and the other end into the 
+top of the base shield in plug D2. 
 
  
 
@@ -92,6 +102,7 @@ GND – speaker wire 2
 The final code is a slight mash-up of the examples given with the RGB driver & LED Strip libraries. 
 
 The code loaded for customer delivery: 
+```
 #include <SD.h>                      // need to include the SD library 
 
 //#define SD_ChipSelectPin 53  //example uses hardware SS pin 53 on Mega2560 
@@ -157,22 +168,36 @@ void loop(){
     delay(interval); 
 
 } 
-
+```
  
 
  
 
 ## Final Assembly 
 
-Side view – all attached to the adjustable stand 
- 
+### Side view
 
- 
+![LED strips and a small speaker wired up to electonics and attatched to a stand](media/sideView.png)
+Side view -all attached to the adjustable stand
 
-### Top View 
+### Top view
 
-LED’s and Speaker attached to the side LED Strip Driver 
+![View from above showing the wiring and the two shields stacked on top of the Arduino.](media/TopView.png)
+Top view
+
+### LEDs and Speaker
+
+![close up the front showing LEDs and speaker](media/LEDs_and_speaker.png)
+LEDs and Speaker attached to the side 
+
+### LED Strip Driver 
+
+![close up of the back showing the wiring and LED strip driver](media/LED_strip_driver.png)
+LED Strip Driver 
  
+### Power supply 
+
+![close up of the power supply wiring](media/Power_supply.png)
 Power supply 
 
  
@@ -185,11 +210,23 @@ LED Strip Driver Library: https://files.seeedstudio.com/wiki/Grove-LED_Strip_Dri
 
  
 
-The Code – initial development. 
+## The Code – initial development. 
 
  
-Basic code to generate white noise: 
+### Basic code to generate white noise: 
 
-Initial attempts to generate the white noise by using basic code to generate random noise worked fine on its own, however as soon as it was in a delay loop with the LED code the ‘white noise’ stsopped working and only gave a wee clicky noise. 
+Initial attempts to generate the white noise by using basic code to generate random noise worked fine on its own, 
+however as soon as it was in a delay loop with the LED code the ‘white noise’ stopped working and only gave a wee 
+clicky noise. 
 
- 
+ ### Sound File
+
+Instead of using code on the Arduino to generate noise in real time, we instead used the following code to 
+generate a sound file and then played from an SD card.
+
+This is the command to generate the [noise sound file](media/burst-500ms.wav):
+
+`sox -q -n burst-500ms.wav synth noise delay 0 remix - fade 0 0.5 0 norm -1`
+
+with thanks to [James Cameron](https://github.com/quozl) who provided the noise generating code here:
+https://github.com/quozl/ameliorating-hemianopia/blob/main/mk-burst
